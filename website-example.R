@@ -3,7 +3,7 @@ library(sf)
 library(htmltools)
 
 # From https://leafletjs.com/examples/choropleth/us-states.js
-states <- read_sf("https://rstudio.github.io/leaflet/json/us-states.geojson")
+states <- read_sf("us-states.geojson")
 
 bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
 pal <- colorBin("YlOrRd", domain = states$density, bins = bins)
