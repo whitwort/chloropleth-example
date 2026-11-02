@@ -1,15 +1,11 @@
 library(leaflet)
-library(geojsonio)
+library(sf)
 library(tidyverse)
 
-geo <- geojson_read("states.geo.json", what = "sp")
+geo <- read_sf("us-states.geojson")
 
-# geo@data <- left_join(geo@data, myTable, by = c("NAME" = "State"))
-
-geo@data <- mutate(geo@data, value = sample(1:100, nrow(geo@data)))
-
-pal <- colorBin("YlOrRd", domain = geo@data$value)
+pal <- colorBin("YlOrRd", domain = geo$density)
 
 leaflet(geo) %>%
-  addPolygons(fillColor = ~pal(value))
+  addPolygons(fillColor = ~pal(density))
 
